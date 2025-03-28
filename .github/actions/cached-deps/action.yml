@@ -1,5 +1,5 @@
 # Custom composite action, File name must be action.yml
-name: "Get & Cache Dependencies"
+name: "Get & Cache Dependencies in composite action"
 description: "Get the dependencies (via npm) and cache them."
 runs:
   using: "composite" # This must be 'composite' for Composite custom Action
