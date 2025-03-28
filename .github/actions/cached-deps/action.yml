@@ -1,16 +1,22 @@
 # Custom composite action, File name must be action.yml
 name: "Get & Cache Dependencies in composite action"
 description: "Get the dependencies (via npm) and cache them."
+inputs: # keyword
+  caching: # Input name given by us
+    description: "Whether to cahe dependencies  or not." # keyword
+    required: false # true/false, True -> caching variable must be pass while calling. False -> use default value
+    default: "true"
 runs:
   using: "composite" # This must be 'composite' for Composite custom Action
   steps:
     - name: Cache dependencies
+      if: inputs.caching  == 'true' # If value of inputs.caching is true, then caching action will execute. Else this step not execute
       id: cache
       uses: actions/cache@v4
       with:
         path: node_modules
         key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
     - name: Install dependencies
-      if: steps.cache.outputs.cache-hit != 'true'
+      if: steps.cache.outputs.cache-hit != 'true' || inputs.caching  != 'true'
       run: npm ci
       shell: bash
