@@ -6,6 +6,10 @@ inputs: # keyword
     description: "Whether to cahe dependencies  or not." # keyword
     required: false # true/false, True -> caching variable must be pass while calling. False -> use default value
     default: "true"
+outputs:
+  used-cache:
+    description: "Whether the cache was used"
+    value: { { steps.install.outputs.cache } }
 runs:
   using: "composite" # This must be 'composite' for Composite custom Action
   steps:
@@ -17,6 +21,9 @@ runs:
         path: node_modules
         key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
     - name: Install dependencies
+      id: installed
       if: steps.cache.outputs.cache-hit != 'true' || inputs.caching  != 'true'
-      run: npm ci
+      run: |
+        npm ci
+        echo "cache='${{ inputs.caching }}'" >> $GITHUB_OUTPUT
       shell: bash

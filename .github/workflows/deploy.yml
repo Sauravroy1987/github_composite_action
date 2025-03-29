@@ -10,9 +10,12 @@ jobs:
       - name: Get code
         uses: actions/checkout@v4
       - name: Load & cache dependencies
+        id: cache-deps
         uses: ./.github/actions/cached-deps # Reference to custom action.yml, Reference to other repository action <Repository Owner>/<Action name>
         with:
           caching: "true"
+      - name: Output Information
+        runs: echo "Cache used? ${{ steps.cache-deps.outputs.used-cache }}"
       - name: Lint code
         run: npm run lint
   test:
