@@ -13,7 +13,7 @@ jobs:
         id: cache-deps
         uses: ./.github/actions/cached-deps # Reference to custom action.yml, Reference to other repository action <Repository Owner>/<Action name>
         with:
-          caching: "false"
+          caching: "true"
       - name: Output Information
         run: echo "Cache used? ${{ steps.cache-deps.outputs.used-cache }}"
       - name: Lint code
