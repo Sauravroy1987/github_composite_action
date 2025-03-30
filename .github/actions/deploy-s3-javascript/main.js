@@ -15,6 +15,9 @@ function run() {
   exec.exec(`aws s3 sync ${distFolderInput} ${s3Uri} --region ${bucketRegion}`); // aws s3 sync <local-folder> <s3 bucket> --region <bucket region>
   // Print this message while executing this line
   core.notice("Hello from my custom Javascript Action!");
+
+  const websiteUrl = `http://${bucket}.s3-website-${bucketRegion}.amazonaws.com`;
+  core.setOutput("website-url", websiteUrl); // Set output from js, This output variable read from action.yml. 'website-url' used in action.yml
 }
 
 run(); // Call runn function

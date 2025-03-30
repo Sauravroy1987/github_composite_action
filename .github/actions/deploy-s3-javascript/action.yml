@@ -11,6 +11,9 @@ inputs:
   dist-folder:
     description: "The Folder containing the deployable files. The files to be uploaded in S3 bucket"
     required: true # mandatory input
+outputs:
+  website-url: # This output variable set from main.js
+    description: "The URL of the deployed website"
 runs:
   using: "node16" # node.js version to run java script
   main: "main.js" # Name of the file to be executed as part of custom action, main.js contains javascript code execute as custom action
