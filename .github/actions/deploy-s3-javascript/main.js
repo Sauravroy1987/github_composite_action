@@ -16,7 +16,7 @@ function run() {
   // Print this message while executing this line
   core.notice("Hello from my custom Javascript Action!");
 
-  const websiteUrl = `http://${bucket}.s3-website-${bucketRegion}.amazonaws.com`;
+  const websiteUrl = `http://${bucket}.s3-website.${bucketRegion}.amazonaws.com`;
   core.setOutput("website-url", websiteUrl); // Set output from js, This output variable read from action.yml. 'website-url' used in action.yml
 }
 
