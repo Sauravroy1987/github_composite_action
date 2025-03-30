@@ -64,7 +64,7 @@ jobs:
           name: dist-files
           path: dist
   deploy:
-    env: ITT
+    environment: ITT
     needs: build
     runs-on: ubuntu-latest
     steps:
