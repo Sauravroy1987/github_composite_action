@@ -1,5 +1,16 @@
 name: "Deploy to AWS S3"
 description: "Deploy a static website via AWS S3."
+inputs:
+  bucket: # Input name
+    description: "The S3 bucket name."
+    required: true # mandatory input
+  bucket-region:
+    description: "The region of S3 bucket."
+    required: false # not mandatory input
+    default: "us-east-1" # default region
+  dist-folder:
+    description: "The Folder containing the deployable files. The files to be uploaded in S3 bucket"
+    required: true # mandatory input
 runs:
   using: "node16" # node.js version to run java script
   main: "main.js" # Name of the file to be executed as part of custom action, main.js contains javascript code execute as custom action

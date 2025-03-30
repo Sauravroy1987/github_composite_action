@@ -64,6 +64,7 @@ jobs:
           name: dist-files
           path: dist
   deploy:
+    env: ITT
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -77,7 +78,15 @@ jobs:
       - name: Output contents
         run: ls
       - name: Deploy site
-        run: echo "Deploying..."
+        uses: ./.github/actions/deploy-s3-javascript
+        env:
+          # AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY are keywords to authenticate AWS account before accessing S3 bucket
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        with:
+          bucket: github-custom-action-hosting-saurav
+          bucket-region: eu-north-1
+          dist-folder: ./dist
   information:
     runs-on: ubuntu-latest
     steps:
