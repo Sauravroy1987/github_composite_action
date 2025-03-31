@@ -6,7 +6,7 @@ on:
 jobs:
   lint:
     permissions:
-      actions: read
+      actions: none
     runs-on: ubuntu-latest
     steps:
       - name: Get code
