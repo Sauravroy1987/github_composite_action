@@ -5,6 +5,8 @@ on:
       - master
 jobs:
   lint:
+    permissions:
+      actions: write
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -86,9 +88,9 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         with:
-          bucket: github-custom-action-hosting-saurav
-          bucket-region: eu-north-1
-          dist-folder: ./dist
+          bucket: github-custom-action-hosting-saurav # Bucket Name
+          bucket-region: eu-north-1 # Region where bucket addedd
+          dist-folder: ./dist # folder where artifacts stored
       - name: Output Information
         run: |
           echo "Live URL: ${{ steps.deploy.outputs.website-url }}"
