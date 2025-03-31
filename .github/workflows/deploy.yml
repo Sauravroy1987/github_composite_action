@@ -5,9 +5,9 @@ on:
       - master
 jobs:
   lint:
-    permissions:
-      actions: none
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
     steps:
       - name: Get code
         uses: actions/checkout@v4
